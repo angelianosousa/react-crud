@@ -4,9 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #212121;
-  color: whitesmoke;
+  min-height: 100vh;
   flex-direction: column;
 }
 

@@ -20,7 +20,7 @@ function App() {
           </div>
         </nav>
         <div className="main">
-          <div className='container mb-3'>
+          <div className='container'>
             <h2 className="main-header">React Crud Operations</h2>
 
             <Switch>
