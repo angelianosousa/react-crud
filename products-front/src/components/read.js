@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
       '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: '10ch',
       },
   },
 }));
@@ -20,7 +20,7 @@ export default function Read() {
   let history = useHistory();
   
   useEffect(() => {
-    axios.get("https://623a728bb5292b8bfcb55026.mockapi.io/Products")
+    axios.get("https://ror-challenge-backend.herokuapp.com/products")
       .then(response => {
         setAPIData(response.data)
       })
@@ -42,7 +42,7 @@ export default function Read() {
   };
 
   const onDelete = (id) => {
-    axios.delete(`https://623a728bb5292b8bfcb55026.mockapi.io/Products/${id}`)
+    axios.delete(`https://ror-challenge-backend.herokuapp.com/products/${id}`)
       .then(() => {
         history.push('/read');
       });
@@ -53,7 +53,7 @@ export default function Read() {
       <TableContainer>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
-            <TableCell><strong>Titulo</strong></TableCell>
+            <TableCell><strong>Title</strong></TableCell>
             <TableCell><strong>Type</strong></TableCell>
             <TableCell><strong>Rating</strong></TableCell>
             <TableCell><strong>Price</strong></TableCell>
@@ -70,7 +70,7 @@ export default function Read() {
                   <TableCell>{data.rating}</TableCell>
                   <TableCell>R$ {data.price}</TableCell>
                   <TableCell>{data.created_at}</TableCell>
-                  <TableCell>
+                  <TableCell colSpan={2}>
                     <Link to='/update'>
                       <Button variant='outlined' onClick={() => setData(data)}>Edit</Button>&nbsp;&nbsp;
                       <Button variant='outlined' onClick={() => onDelete(data.id)}>Delete</Button>

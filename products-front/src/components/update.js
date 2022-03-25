@@ -56,7 +56,7 @@ export default function Update() {
     }, []);
 
     const updateAPIData = () => {
-        axios.put(`https://623a728bb5292b8bfcb55026.mockapi.io/Products/${id}`, {
+        axios.put(`https://ror-challenge-backend.herokuapp.com/products/${id}`, {
             title,
             prod_type,
             description,

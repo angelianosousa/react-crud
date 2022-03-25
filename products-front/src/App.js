@@ -21,7 +21,7 @@ function App() {
           <div className="container message">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do elusmod tempor incididunt ut labore et dolore magna alíqua</p>
           </div>
-          <div>
+          <div className="upload">
             <UploadFiles />
           </div>
 

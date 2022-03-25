@@ -6,7 +6,6 @@
   align-items: center;
   min-height: 100vh;
   flex-direction: column;
-  margin-top: 20px;
 }
 
 .create-form label{
@@ -23,4 +22,8 @@ table, tbody, tr, th, td {
   border: 1px solid black;
   padding: 25px;
   margin: 25px;
+}
+
+.upload {
+  margin: 50px;
 }
