@@ -33,14 +33,6 @@ export default class UploadFiles extends Component {
     };
   }
 
-  componentDidMount() {
-    UploadService.getFiles().then((response) => {
-      this.setState({
-        fileInfos: response.data,
-      });
-    });
-  }
-
   selectFile(event) {
     this.setState({
       selectedFiles: event.target.files,
@@ -60,13 +52,6 @@ export default class UploadFiles extends Component {
         progress: Math.round((100 * event.loaded) / event.total),
       });
     })
-      .then((response) => {
-        this.setState({
-          message: response.data.message,
-          isError: false
-        });
-        return UploadService.getFiles();
-      })
       .then((files) => {
         this.setState({
           fileInfos: files.data,
@@ -119,16 +104,17 @@ export default class UploadFiles extends Component {
           <Button
             className="btn-choose"
             variant="outlined"
+            style={{width: '300px'}}
             component="span" >
              <div className="file-name">
               {selectedFiles && selectedFiles.length > 0 ? selectedFiles[0].name : "Anexar Arquivo .json"}
             </div>
           </Button>
-        </label>&nbsp;
+        </label>&nbsp;&nbsp;&nbsp;
         <Button
-          className="btn-upload btn-info"
+          className="btn-upload"
           variant="contained"
-          component="span"
+          color='primary'
           disabled={!selectedFiles}
           onClick={this.upload}>
           Enviar

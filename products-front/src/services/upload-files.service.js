@@ -4,7 +4,7 @@ class UploadFilesService {
   upload(file, onUploadProgress) {
     let formData = new FormData();
 
-    formData.append("file", file);
+    formData.append("document_json", file);
 
     return http.post("/products", formData, {
       headers: {
@@ -12,10 +12,6 @@ class UploadFilesService {
       },
       onUploadProgress,
     });
-  }
-
-  getFiles() {
-    return http.get("/files");
   }
 }
 

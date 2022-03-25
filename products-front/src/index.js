@@ -13,7 +13,6 @@ ReactDOM.render(
         React CRUD
       </a>
     </nav><br/>
-
     <App />
   </BrowserRouter>,
   document.getElementById('root')

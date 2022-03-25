@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router'
@@ -14,6 +14,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const dataAtualFormatada = (date) => {
+  let data = new Date(date),
+      dia  = data.getDate().toString().padStart(2, '0'),
+      mes  = (data.getMonth()+1).toString().padStart(2, '0'),
+      ano  = data.getFullYear();
+  return dia+"/"+mes+"/"+ano;
+}
+
 export default function Read() {
   const classes = useStyles();
   const [APIData, setAPIData] = useState([]);
@@ -27,17 +35,15 @@ export default function Read() {
   }, []);
 
   const setData = (data) => {
-    let { id, title, prod_type, filename, description, width, height, price, rating, created_at } = data;
+    let { id, title, prod_type, description, width, height, price, rating } = data;
     localStorage.setItem('ID', id);
     localStorage.setItem('Title', title);
     localStorage.setItem('ProdType', prod_type);
-    localStorage.setItem('FileName', filename);
     localStorage.setItem('Description', description);
     localStorage.setItem('Width', width);
     localStorage.setItem('Height', height);
     localStorage.setItem('Price', price);
     localStorage.setItem('Rating', rating);
-    localStorage.setItem('CreatedAt', created_at);
     console.log(data);
   };
 
@@ -50,37 +56,35 @@ export default function Read() {
 
   return (
     <div>
-      <TableContainer>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
             <TableCell><strong>Title</strong></TableCell>
             <TableCell><strong>Type</strong></TableCell>
             <TableCell><strong>Rating</strong></TableCell>
             <TableCell><strong>Price</strong></TableCell>
             <TableCell><strong>Created</strong></TableCell>
             <TableCell><strong>Action</strong></TableCell>
-          </TableHead>
+          </TableRow>
+        </TableHead>
 
-          <TableBody>
-            {APIData.map((data) => {
-              return (
-                <TableRow>
-                  <TableCell>{data.title}</TableCell>
-                  <TableCell>{data.prod_type}</TableCell>
-                  <TableCell>{data.rating}</TableCell>
-                  <TableCell>R$ {data.price}</TableCell>
-                  <TableCell>{data.created_at}</TableCell>
-                  <TableCell colSpan={2}>
-                    <Link to='/update'>
-                      <Button variant='outlined' onClick={() => setData(data)}>Edit</Button>&nbsp;&nbsp;
-                      <Button variant='outlined' onClick={() => onDelete(data.id)}>Delete</Button>
-                    </Link>
-                  </TableCell>
-                </TableRow>
-            )})}
-          </TableBody>
-        </Table>
-      </TableContainer><br />
+        <TableBody>
+          {APIData.map((data) => {
+            return (
+              <TableRow>
+                <TableCell>{data.title}</TableCell>
+                <TableCell>{data.prod_type}</TableCell>
+                <TableCell>{data.rating}</TableCell>
+                <TableCell>R$ {data.price}</TableCell>
+                <TableCell>{dataAtualFormatada(data.created_at)}</TableCell>
+                <TableCell colSpan={2}>
+                    <Link to='/update' onClick={() => setData(data)}>Edit</Link>&nbsp;&nbsp;
+                    <Link to='/update' onClick={() => onDelete(data.id)}>Delete</Link>
+                </TableCell>
+              </TableRow>
+          )})}
+        </TableBody>
+      </Table>
     </div>
   )
 }

@@ -16,22 +16,24 @@ function App() {
             </a>
           </nav>
         </div>
-          
-        <div className="main">
-          <div className="container message">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do elusmod tempor incididunt ut labore et dolore magna alíqua</p>
-          </div>
-          <div className="upload">
-            <UploadFiles />
-          </div>
 
-          <div className='container'>
-            <Switch>
-              <Route exact path='/create' component={Create} />
-              <Route exact path="/read" component={Read} />
-              <Route path="/Update" component={Update} />
-            </Switch>
+        <div className="container message">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do elusmod tempor incididunt ut labore et dolore magna alíqua</p>
+        </div>
+        <div className="upload">
+          <UploadFiles />
+        </div>
+        <div className="main">
+          <div className='container'>            
+            <div className='container'>
+              <Switch>
+                <Route exact path='/create' component={Create} />
+                <Route exact path={["/", "/read"]} component={Read} />
+                <Route path="/update" component={Update} />
+              </Switch>
+            </div>
           </div>
+          
         </div>
       </div>
   );
