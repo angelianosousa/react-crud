@@ -8,6 +8,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <BrowserRouter>
+    <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <a href="/read" className="navbar-brand">
+        React CRUD
+      </a>
+    </nav><br/>
+
     <App />
   </BrowserRouter>,
   document.getElementById('root')

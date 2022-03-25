@@ -1,28 +1,31 @@
 import './App.css';
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom';
 import Read from './components/read';
 import Create from './components/create';
 import Update from './components/update';
+import UploadFiles from "./components/upload-files.component";
 
 function App() {
+
   return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/read" className="navbar-brand">
-            React CRUD
-          </a>
-          <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/create"} className="btn btn-light">
-                Create
-              </Link>
-            </li>
-          </div>
-        </nav>
+        <div className='container-fluid'>
+          <nav className="navbar navbar-expand navbar-dark bg-dark">
+            <a href="/read" className="navbar-brand">
+              Home
+            </a>
+          </nav>
+        </div>
+          
         <div className="main">
-          <div className='container'>
-            <h2 className="main-header">React Crud Operations</h2>
+          <div className="container message">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do elusmod tempor incididunt ut labore et dolore magna alíqua</p>
+          </div>
+          <div>
+            <UploadFiles />
+          </div>
 
+          <div className='container'>
             <Switch>
               <Route exact path='/create' component={Create} />
               <Route exact path="/read" component={Read} />

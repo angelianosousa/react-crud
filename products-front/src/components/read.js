@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Button from '@material-ui/core/Button';
-import axios from 'axios';
-import { useHistory } from 'react-router'
+import { Button, TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router'
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,16 +27,18 @@ export default function Read() {
   }, []);
 
   const setData = (data) => {
-    let { id, title, prod_type, filename, description, width, height, price, rating } = data;
+    let { id, title, prod_type, filename, description, width, height, price, rating, created_at } = data;
     localStorage.setItem('ID', id);
-    localStorage.getItem('Title', title);
-    localStorage.getItem('ProdType', prod_type);
-    localStorage.getItem('FileName', filename);
-    localStorage.getItem('Description', description);
-    localStorage.getItem('Width', width);
-    localStorage.getItem('Height', height);
-    localStorage.getItem('Price', price);
-    localStorage.getItem('Rating', rating);
+    localStorage.setItem('Title', title);
+    localStorage.setItem('ProdType', prod_type);
+    localStorage.setItem('FileName', filename);
+    localStorage.setItem('Description', description);
+    localStorage.setItem('Width', width);
+    localStorage.setItem('Height', height);
+    localStorage.setItem('Price', price);
+    localStorage.setItem('Rating', rating);
+    localStorage.setItem('CreatedAt', created_at);
+    console.log(data);
   };
 
   const onDelete = (id) => {
@@ -52,24 +48,17 @@ export default function Read() {
       });
   };
 
-  const getData = () => {
-    axios.get("https://623a728bb5292b8bfcb55026.mockapi.io/Products")
-      .then(() => {
-        setAPIData(getData.data);
-      });
-  };
-
   return (
     <div>
       <TableContainer>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
-            <TableRow>
-              <TableCell>Titulo</TableCell>
-              <TableCell>Nome do arquivo</TableCell>
-              <TableCell>Descrição</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
+            <TableCell><strong>Titulo</strong></TableCell>
+            <TableCell><strong>Type</strong></TableCell>
+            <TableCell><strong>Rating</strong></TableCell>
+            <TableCell><strong>Price</strong></TableCell>
+            <TableCell><strong>Created</strong></TableCell>
+            <TableCell><strong>Action</strong></TableCell>
           </TableHead>
 
           <TableBody>
@@ -77,21 +66,21 @@ export default function Read() {
               return (
                 <TableRow>
                   <TableCell>{data.title}</TableCell>
-                  <TableCell>{data.filename}</TableCell>
-                  <TableCell>{data.description}</TableCell>
-                  <Link to='/update'>
-                    <TableCell>
-                      <Button variant='contained' color='dark' onClick={() => setData(data)}>Update</Button>
-                    </TableCell>
-                    <TableCell>
-                      <Button variant='contained' color='danger' onClick={() => onDelete(data.id)}>Delete</Button>
-                    </TableCell>
-                  </Link>
+                  <TableCell>{data.prod_type}</TableCell>
+                  <TableCell>{data.rating}</TableCell>
+                  <TableCell>R$ {data.price}</TableCell>
+                  <TableCell>{data.created_at}</TableCell>
+                  <TableCell>
+                    <Link to='/update'>
+                      <Button variant='outlined' onClick={() => setData(data)}>Edit</Button>&nbsp;&nbsp;
+                      <Button variant='outlined' onClick={() => onDelete(data.id)}>Delete</Button>
+                    </Link>
+                  </TableCell>
                 </TableRow>
             )})}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainer><br />
     </div>
   )
 }
