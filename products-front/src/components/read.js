@@ -28,7 +28,7 @@ export default function Read() {
   let history = useHistory();
   
   useEffect(() => {
-    axios.get("https://ror-challenge-backend.herokuapp.com/products")
+    axios.get("https://ror-challenge-backend.herokuapp.com/products", { headers: {"Authorization": "Bearer bf664015872f91c5982765bb412c1501"}})
       .then(response => {
         setAPIData(response.data)
       })
@@ -48,7 +48,7 @@ export default function Read() {
   };
 
   const onDelete = (id) => {
-    axios.delete(`https://ror-challenge-backend.herokuapp.com/products/${id}`)
+    axios.delete(`https://ror-challenge-backend.herokuapp.com/products/${id}`, { headers: {"Authorization": "Bearer bf664015872f91c5982765bb412c1501"}})
       .then(() => {
         history.push('/read');
       });

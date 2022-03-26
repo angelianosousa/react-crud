@@ -4,14 +4,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 50vh;
+  min-height: 10vh;
   flex-direction: column;
+  margin-bottom: 75px;
 }
 
-.create-form label{
+.create-form {
   color: whitesmoke !important;
   font-family: 'Montserrat', sans-serif;
-  font-size:5px !important;
+  font-size: 5px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
 }
 
 table, tbody, tr, th, td {
@@ -20,8 +25,9 @@ table, tbody, tr, th, td {
 
 .message {
   border: 1px solid black;
+  width: 700px;
   padding: 25px;
-  margin: 25px;
+  margin: auto;
 }
 
 .upload {
@@ -29,4 +35,15 @@ table, tbody, tr, th, td {
   justify-content: center;
   align-items: center;
   margin: 50px;
+}
+
+.navbar {
+  border: 1px solid black;
+  padding: 20px 300px;
+  margin: 25px;
+}
+
+.navbar2 {
+  border-bottom: 1px solid black;
+  padding: 25px;
 }

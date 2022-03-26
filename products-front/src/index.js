@@ -4,15 +4,9 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <BrowserRouter>
-    <nav className="navbar navbar-expand navbar-dark bg-dark">
-      <a href="/read" className="navbar-brand">
-        React CRUD
-      </a>
-    </nav><br/>
     <App />
   </BrowserRouter>,
   document.getElementById('root')
