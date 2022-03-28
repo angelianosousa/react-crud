@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button, Card, Grid, FormControl, TextField, MenuItem, Select, InputLabel, FormLabel, RadioGroup, Radio, FormControlLabel } from '@material-ui/core';
 import axios from 'axios';
 import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
+import FlashMessage from './FlashMessage';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -53,18 +53,25 @@ export default function Update() {
     }, []);
 
     const updateAPIData = () => {
-        axios.put(`https://ror-challenge-backend.herokuapp.com/products/${id}`, { headers: {"Authorization": "Bearer bf664015872f91c5982765bb412c1501"}}, {
+        axios.patch(`https://ror-challenge-backend.herokuapp.com/products/${id}`, {
             title,
             prod_type,
             description,
             width,
             height,
             price,
-            rating,
-        }).then(() => {
+            rating
+        }, { headers: {
+                "Authorization": "Bearer bf664015872f91c5982765bb412c1501",
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
             history.push('/read')
+        }).catch(error => {
+            console.log(error);
         })
     }
+
     return (
       <div class='create-form'>
         <form className={classes.root} noValidate autocomplete='off'>
@@ -131,11 +138,10 @@ export default function Update() {
             <br /><br />
             <Button onClick={() => {updateAPIData()}} color='primary' variant='contained'>
                 Salvar
-            </Button>&nbsp;
+            </Button>&nbsp;&nbsp;&nbsp;&nbsp;
             <Button variant="contained" color="secondary" href="/read">
                 Voltar
             </Button>
-            
         </form>
       </div>
     )

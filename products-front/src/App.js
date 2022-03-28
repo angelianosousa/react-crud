@@ -1,5 +1,5 @@
 import './App.css';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Read from './components/read';
 import Create from './components/create';
 import Update from './components/update';
@@ -17,9 +17,9 @@ function App() {
         </nav>
 
         <nav className='navbar'>
-          <Link to='/read'>
+          <Button href='/read'>
             Home
-          </Link >
+          </Button>
         </nav>
 
         <Container>

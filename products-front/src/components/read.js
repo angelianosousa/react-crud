@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router'
 import axios from 'axios';
+import FlashMessage from './FlashMessage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,9 +23,10 @@ const dataAtualFormatada = (date) => {
   return dia+"/"+mes+"/"+ano;
 }
 
-export default function Read() {
+export default function TableProducts() {
   const classes = useStyles();
   const [APIData, setAPIData] = useState([]);
+  const [message, setMessage] = useState("")
   let history = useHistory();
   
   useEffect(() => {
@@ -78,8 +80,8 @@ export default function Read() {
                 <TableCell>R$ {data.price}</TableCell>
                 <TableCell>{dataAtualFormatada(data.created_at)}</TableCell>
                 <TableCell colSpan={2}>
-                    <Link to='/update' onClick={() => setData(data)}>Edit</Link>&nbsp;&nbsp;
-                    <Link to='/update' onClick={() => onDelete(data.id)}>Delete</Link>
+                  <Link to='/update' onClick={() => setData(data)}>Edit</Link>&nbsp;&nbsp;
+                  <Link to='/update' onClick={() => onDelete(data.id)}>Delete</Link>
                 </TableCell>
               </TableRow>
           )})}

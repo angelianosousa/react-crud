@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { Box, Typography, Button, ListItem, withStyles } from '@material-ui/core';
+import { Box, Typography, Button, withStyles } from '@material-ui/core';
 import UploadService from "../services/upload-files.service";
+import FlashMessage from './FlashMessage'
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -29,7 +30,6 @@ export default class UploadFiles extends Component {
       progress: 0,
       message: "",
       isError: false,
-      fileInfos: [],
     };
   }
 
@@ -57,17 +57,19 @@ export default class UploadFiles extends Component {
           fileInfos: files.data,
         });
       })
-      .catch(() => {
+      .catch(error => {
         this.setState({
           progress: 0,
           message: "Could not upload the file!",
           currentFile: undefined,
           isError: true
         });
+        console.log(error);
       });
 
     this.setState({
       selectedFiles: undefined,
+      message: "Upload was successfully!"
     });
   }
 
@@ -77,7 +79,6 @@ export default class UploadFiles extends Component {
       currentFile,
       progress,
       message,
-      fileInfos,
       isError
     } = this.state;
     
@@ -106,7 +107,7 @@ export default class UploadFiles extends Component {
             variant="outlined"
             style={{width: '300px'}}
             component="span" >
-             <div className="file-name">
+            <div className="file-name">
               {selectedFiles && selectedFiles.length > 0 ? selectedFiles[0].name : "Anexar Arquivo .json"}
             </div>
           </Button>
@@ -120,20 +121,10 @@ export default class UploadFiles extends Component {
           Enviar
         </Button>
 
-        <Typography variant="subtitle2" className={`upload-message ${isError ? "error" : ""}`}>
-          {message}
-        </Typography>
+        {
+          message ? <FlashMessage message={message} severity={isError} /> : '' 
+        }
 
-        <ul className="list-group">
-          {fileInfos &&
-            fileInfos.map((file, index) => (
-              <ListItem
-                divider
-                key={index}>
-                <a href={file.url}>{file.name}</a>
-              </ListItem>
-            ))}
-        </ul>
       </div >
     );
   }

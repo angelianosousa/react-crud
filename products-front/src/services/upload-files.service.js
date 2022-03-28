@@ -9,6 +9,7 @@ class UploadFilesService {
     return http.post("/products", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
+        "Authorization": "Bearer bf664015872f91c5982765bb412c1501"
       },
       onUploadProgress,
     });
